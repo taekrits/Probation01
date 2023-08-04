@@ -10,7 +10,7 @@ import java.time.LocalDate
 
 @RequiresApi(Build.VERSION_CODES.O)
 class C01MainActivityViewModel : ViewModel() {
-    val mockList = listOf(
+    val aMockList = listOf(
         CDownloadList(
             bSelect = false,
             tName = "บริษัท",
@@ -26,37 +26,37 @@ class C01MainActivityViewModel : ViewModel() {
             tName = "ผู้ใช้",
             tDateTime = "2023-08-02 11:41:28"
         ),)
-    val state: MutableLiveData<CDownloadData> by lazy {
+    val oState: MutableLiveData<CDownloadData> by lazy {
         MutableLiveData<CDownloadData>(
             CDownloadData(
                 tSearchEditText = " ",
                 tDateEditText = LocalDate.now().toString(),
-                aDataDownloadList = mockList
+                aDataDownloadList = aMockList
             )
         )
     }
 
-    fun onCheckSyncData(pbCheck: Boolean) {
+    fun C_SETxCheckSyncData(pbCheck: Boolean) {
         if (pbCheck) {
-            state.value = state.value?.copy(bShowingOldDataLine = false)
+            oState.value = oState.value?.copy(bShowingOldDataLine = false)
         } else {
-            state.value = state.value?.copy(bShowingOldDataLine = true)
+            oState.value = oState.value?.copy(bShowingOldDataLine = true)
         }
     }
 
-    fun onCheckAllData(pbCheck: Boolean) {
+    fun C_SETxCheckAllData(pbCheck: Boolean) {
 
-        val dataList = state.value?.aDataDownloadList
+        val aDataList = oState.value?.aDataDownloadList
         if (pbCheck) {
-            state.value = state.value?.copy(
-                aDataDownloadList = dataList?.map {
+            oState.value = oState.value?.copy(
+                aDataDownloadList = aDataList?.map {
                     it.bSelect = true
                     it
                 } ?: listOf()
             )
         } else {
-            state.value = state.value?.copy(
-                aDataDownloadList = dataList?.map {
+            oState.value = oState.value?.copy(
+                aDataDownloadList = aDataList?.map {
                     it.bSelect = false
                     it
                 } ?: listOf()
@@ -64,19 +64,19 @@ class C01MainActivityViewModel : ViewModel() {
         }
     }
 
-    fun searchData(ptText: String) {
-        val dataList = state.value?.aDataDownloadList
+    fun C_SETxSearchData(ptText: String) {
+        val aDataList = oState.value?.aDataDownloadList
 
         if (ptText != "") {
 
-            state.value = state.value?.copy(
-                aDataDownloadList = dataList?.filter {
+            oState.value = oState.value?.copy(
+                aDataDownloadList = aDataList?.filter {
                     it.tName.contains(ptText)
                 } ?: listOf()
             )
         } else{
-            state.value = state.value?.copy(
-                aDataDownloadList = mockList
+            oState.value = oState.value?.copy(
+                aDataDownloadList = aMockList
             )
         }
     }

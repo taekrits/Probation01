@@ -16,7 +16,7 @@ import java.util.Calendar
 @RequiresApi(Build.VERSION_CODES.O)
 class C01MainActivity : AppCompatActivity() {
 
-    private val viewModel: C01MainActivityViewModel by lazy {
+    private val oViewModel: C01MainActivityViewModel by lazy {
         ViewModelProvider(this).get(C01MainActivityViewModel::class.java)
     }
     lateinit var binding: W01activityMainBinding
@@ -44,7 +44,7 @@ class C01MainActivity : AppCompatActivity() {
             }, oYear, oMonth, oDay)
 
 //            binding.oet01search.setText(it.searchEditText)
-        viewModel.state.observe(this) {
+        oViewModel.oState.observe(this) {
 
             binding.oet01Date.setText(it.tDateEditText.toString())
             binding.recyclerView.layoutManager =
@@ -61,14 +61,14 @@ class C01MainActivity : AppCompatActivity() {
 
         }
 
-        binding.ocb01SyncData.setOnCheckedChangeListener { compoundButton, bChecked ->
-            viewModel.onCheckSyncData(bChecked)
+        binding.ocb01SyncData.setOnCheckedChangeListener { compoundButton, pbChecked ->
+            oViewModel.C_SETxCheckSyncData(pbChecked)
         }
-        binding.ocb01SelectAllData.setOnCheckedChangeListener { compoundButton, bChecked ->
-            viewModel.onCheckAllData(bChecked)
+        binding.ocb01SelectAllData.setOnCheckedChangeListener { compoundButton, pbChecked ->
+            oViewModel.C_SETxCheckAllData(pbChecked)
         }
         binding.oet01search.doOnTextChanged { text, start, before, count ->
-            viewModel.searchData(text.toString())
+            oViewModel.C_SETxSearchData(text.toString())
         }
         binding.oet01Date.setOnClickListener {
             oDatePickerDialog.show()

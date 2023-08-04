@@ -13,11 +13,11 @@ import com.example.adap1.databinding.W01mainDownloadListLayoutAdaptorBinding
 class C01MainActivityAdapter(private val dataList: List<CDownloadList>) : RecyclerView.Adapter<C01MainActivityAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: W01mainDownloadListLayoutAdaptorBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: CDownloadList) {
+        fun bind(paData: CDownloadList) {
 
-            binding.otv02NameDownload.text = data.tName
-            binding.otv02DateAndTime.text = data.tDateTime
-            binding.ocb02SelectData.isChecked = data.bSelect
+            binding.otv02NameDownload.text = paData.tName
+            binding.otv02DateAndTime.text = paData.tDateTime
+            binding.ocb02SelectData.isChecked = paData.bSelect
         }
     }
 
@@ -29,8 +29,8 @@ class C01MainActivityAdapter(private val dataList: List<CDownloadList>) : Recycl
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val data = dataList[position]
-        holder.bind(data)
+        val oData = dataList[position]
+        holder.bind(oData)
         if(position % 2 == 0){
 
         } else{
