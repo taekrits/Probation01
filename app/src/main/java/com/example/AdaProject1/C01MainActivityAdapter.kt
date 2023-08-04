@@ -12,20 +12,20 @@ import com.example.adap1.databinding.W01mainDownloadListLayoutAdaptorBinding
 
 class C01MainActivityAdapter(private val dataList: List<CDownloadList>) : RecyclerView.Adapter<C01MainActivityAdapter.ViewHolder>() {
 
-    class ViewHolder(val binding: W01mainDownloadListLayoutAdaptorBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val oBinding: W01mainDownloadListLayoutAdaptorBinding) : RecyclerView.ViewHolder(oBinding.root) {
         fun bind(paData: CDownloadList) {
 
-            binding.otv02NameDownload.text = paData.tName
-            binding.otv02DateAndTime.text = paData.tDateTime
-            binding.ocb02SelectData.isChecked = paData.bSelect
+            oBinding.otv02NameDownload.text = paData.tName
+            oBinding.otv02DateAndTime.text = paData.tDateTime
+            oBinding.ocb02SelectData.isChecked = paData.bSelect
         }
     }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = W01mainDownloadListLayoutAdaptorBinding.inflate(inflater, parent, false)
-        return ViewHolder(binding)
+        val oInflater = LayoutInflater.from(parent.context)
+        val oBinding = W01mainDownloadListLayoutAdaptorBinding.inflate(oInflater, parent, false)
+        return ViewHolder(oBinding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -34,7 +34,7 @@ class C01MainActivityAdapter(private val dataList: List<CDownloadList>) : Recycl
         if(position % 2 == 0){
 
         } else{
-            holder.binding.background.setBackgroundColor( Color.WHITE )
+            holder.oBinding.background.setBackgroundColor( Color.WHITE )
         }
     }
 

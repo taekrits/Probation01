@@ -19,7 +19,7 @@ class C01MainActivity : AppCompatActivity() {
     private val oViewModel: C01MainActivityViewModel by lazy {
         ViewModelProvider(this).get(C01MainActivityViewModel::class.java)
     }
-    lateinit var binding: W01activityMainBinding
+    lateinit var oBinding: W01activityMainBinding
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,45 +32,45 @@ class C01MainActivity : AppCompatActivity() {
 
 
 
-        binding = W01activityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        oBinding = W01activityMainBinding.inflate(layoutInflater)
+        setContentView(oBinding.root)
 
         val oDatePickerDialog =
             DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
                 val tSelectedDate = "$selectedYear-${selectedMonth + 1}-${selectedDay}"
                 val oSelectedDateEditable: Editable =
                     Editable.Factory.getInstance().newEditable(tSelectedDate)
-                binding.oet01Date.text = oSelectedDateEditable
+                oBinding.oet01Date.text = oSelectedDateEditable
             }, oYear, oMonth, oDay)
 
 //            binding.oet01search.setText(it.searchEditText)
         oViewModel.oState.observe(this) {
 
-            binding.oet01Date.setText(it.tDateEditText.toString())
-            binding.recyclerView.layoutManager =
+            oBinding.oet01Date.setText(it.tDateEditText.toString())
+            oBinding.recyclerView.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-            binding.recyclerView.adapter = C01MainActivityAdapter(it.aDataDownloadList)
+            oBinding.recyclerView.adapter = C01MainActivityAdapter(it.aDataDownloadList)
 
             if (it.bShowingOldDataLine) {
-                binding.ocb01OldData.visibility = View.VISIBLE
-                binding.oet01Date.visibility = View.VISIBLE
+                oBinding.ocb01OldData.visibility = View.VISIBLE
+                oBinding.oet01Date.visibility = View.VISIBLE
             } else {
-                binding.ocb01OldData.visibility = View.GONE
-                binding.oet01Date.visibility = View.GONE
+                oBinding.ocb01OldData.visibility = View.GONE
+                oBinding.oet01Date.visibility = View.GONE
             }
 
         }
 
-        binding.ocb01SyncData.setOnCheckedChangeListener { compoundButton, pbChecked ->
+        oBinding.ocb01SyncData.setOnCheckedChangeListener { compoundButton, pbChecked ->
             oViewModel.C_SETxCheckSyncData(pbChecked)
         }
-        binding.ocb01SelectAllData.setOnCheckedChangeListener { compoundButton, pbChecked ->
+        oBinding.ocb01SelectAllData.setOnCheckedChangeListener { compoundButton, pbChecked ->
             oViewModel.C_SETxCheckAllData(pbChecked)
         }
-        binding.oet01search.doOnTextChanged { text, start, before, count ->
+        oBinding.oet01search.doOnTextChanged { text, start, before, count ->
             oViewModel.C_SETxSearchData(text.toString())
         }
-        binding.oet01Date.setOnClickListener {
+        oBinding.oet01Date.setOnClickListener {
             oDatePickerDialog.show()
         }
     }
