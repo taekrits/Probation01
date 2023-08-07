@@ -10,7 +10,7 @@ import java.time.LocalDate
 
 @RequiresApi(Build.VERSION_CODES.O)
 class C01MainActivityViewModel : ViewModel() {
-    val aMockList = listOf(
+    val aoC_MockList = listOf(
         CDownloadList(
             bSelect = false,
             tName = "บริษัท",
@@ -26,36 +26,36 @@ class C01MainActivityViewModel : ViewModel() {
             tName = "ผู้ใช้",
             tDateTime = "2023-08-02 11:41:28"
         ),)
-    val oState: MutableLiveData<CDownloadData> by lazy {
+    val oC_State: MutableLiveData<CDownloadData> by lazy {
         MutableLiveData<CDownloadData>(
             CDownloadData(
                 tSearchEditText = " ",
                 tDateEditText = LocalDate.now().toString(),
-                aDataDownloadList = aMockList
+                aDataDownloadList = aoC_MockList
             )
         )
     }
 
     fun C_SETxCheckSyncData(pbCheck: Boolean) {
         if (pbCheck) {
-            oState.value = oState.value?.copy(bShowingOldDataLine = false)
+            oC_State.value = oC_State.value?.copy(bShowingOldDataLine = false)
         } else {
-            oState.value = oState.value?.copy(bShowingOldDataLine = true)
+            oC_State.value = oC_State.value?.copy(bShowingOldDataLine = true)
         }
     }
 
     fun C_SETxCheckAllData(pbCheck: Boolean) {
 
-        val aDataList = oState.value?.aDataDownloadList
+        val aDataList = oC_State.value?.aDataDownloadList
         if (pbCheck) {
-            oState.value = oState.value?.copy(
+            oC_State.value = oC_State.value?.copy(
                 aDataDownloadList = aDataList?.map {
                     it.bSelect = true
                     it
                 } ?: listOf()
             )
         } else {
-            oState.value = oState.value?.copy(
+            oC_State.value = oC_State.value?.copy(
                 aDataDownloadList = aDataList?.map {
                     it.bSelect = false
                     it
@@ -65,18 +65,18 @@ class C01MainActivityViewModel : ViewModel() {
     }
 
     fun C_SETxSearchData(ptText: String) {
-        val aDataList = oState.value?.aDataDownloadList
+        val aDataList = oC_State.value?.aDataDownloadList
 
         if (ptText != "") {
 
-            oState.value = oState.value?.copy(
+            oC_State.value = oC_State.value?.copy(
                 aDataDownloadList = aDataList?.filter {
                     it.tName.contains(ptText)
                 } ?: listOf()
             )
         } else{
-            oState.value = oState.value?.copy(
-                aDataDownloadList = aMockList
+            oC_State.value = oC_State.value?.copy(
+                aDataDownloadList = aoC_MockList
             )
         }
     }
